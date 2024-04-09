@@ -1,6 +1,6 @@
 ﻿[录制设置]
 直播保存路径（不填则默认） = /Users/ginhoor/Downloads/Source/Live
-视频保存格式ts|mkv|flv|mp4|ts音频|mkv音频 = mp4
+视频保存格式ts|mkv|flv|mp4|ts音频|mkv音频 = ts
 原画|超清|高清|标清 = 原画
 是否使用代理ip（是/否） = 是
 代理地址 =

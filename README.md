@@ -6,9 +6,9 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/ihmily/douyin-live-recorder?label=Docker%20Pulls&color=blue&logo=docker)](https://hub.docker.com/r/ihmily/douyin-live-recorder/tags)
 ![GitHub issues](https://img.shields.io/github/issues/ihmily/DouyinLiveRecorder.svg)
 [![Latest Release](https://img.shields.io/github/v/release/ihmily/DouyinLiveRecorder)](https://github.com/ihmily/DouyinLiveRecorder/releases/latest)
-![Downloads](https://img.shields.io/github/downloads/ihmily/DouyinLiveRecorder/total)
+[![Downloads](https://img.shields.io/github/downloads/ihmily/DouyinLiveRecorder/total)](https://github.com/ihmily/DouyinLiveRecorder/releases/latest)
 
-一款简易的可循环值守的直播录制工具，基于FFmpeg实现多平台直播源录制，支持自定义配置录制以及直播状态推送。
+一款**简易**的可循环值守的直播录制工具，基于FFmpeg实现多平台直播源录制，支持自定义配置录制以及直播状态推送。
 
 </div>
 
@@ -27,8 +27,13 @@
 - [x] AfreecaTV
 - [x] 网易cc
 - [x] 千度热播
-- [x] pandaTV
+- [x] PandaTV
 - [x] 猫耳FM
+- [x] Look直播
+- [x] WinkTV
+- [x] FlexTV
+- [x] PopkonTV
+- [x] TwitCasting
 - [ ] 更多平台正在更新中
 
 </div>
@@ -38,7 +43,6 @@
 ```
 .
 └── DouyinLiveRecorder/
-    ├── /api -> (get live stream api )
     ├── /config -> (config record)
     ├── /logs -> (save runing log file)
     ├── /backup_config -> (backup file)
@@ -67,7 +71,7 @@
 - 压缩包解压后，在 `config` 文件夹内的 `URL_config.ini` 中添加录制直播间地址，一行一个直播间地址。如果要自定义配置录制，可以修改`config.ini` 文件，推荐将录制格式修改为`ts`。
 - 以上步骤都做好后，就可以运行`DouyinLiveRecorder.exe` 程序进行录制了。录制的视频文件保存在同目录下的 `downloads` 文件夹内。
 
-- 另外，如果需要录制TikTok、AfreecaTV等海外平台，请在配置文件中设置开启代理并添加proxy_addr链接 如：`http://127.0.0.1:7890` （这只是示例地址，具体根据实际填写）。
+- 另外，如果需要录制TikTok、AfreecaTV等海外平台，请在配置文件中设置开启代理并添加proxy_addr链接 如：`127.0.0.1:7890` （这只是示例地址，具体根据实际填写）。
 
 - 假如`URL_config.ini`文件中添加的直播间地址，有个别直播间暂时不想录制又不想移除链接，可以在对应直播间的链接开头加上`#`，那么下次启动软件录制时将跳过该直播间。
 
@@ -76,7 +80,7 @@
 - 如果要长时间挂着软件循环监测直播，最好循环时间设置长一点（咱也不差没录制到的那几分钟），避免因请求频繁导致被官方封禁IP 。
 
 - 要停止直播录制，使用`Ctrl+C ` 或直接关闭程序即可。
-- 最后，欢迎右上角给本项目一个star，同时也非常乐意大家提交pr（请先询问我，避免做无用功）。
+- 最后，欢迎右上角给本项目一个star，同时也非常乐意大家提交pr。
 
 &emsp;
 
@@ -107,7 +111,7 @@ B站：
 https://live.bilibili.com/320
 
 小红书：
-https://www.redelight.cn/hina/livestream/569077534207413574/1707413727088?appuid=5f3f478a00000000010005b3&
+https://www.xiaohongshu.com/hina/livestream/569077534207413574/1707413727088?appuid=5f3f478a00000000010005b3&
 
 bigo直播：
 https://www.bigo.tv/cn/716418802
@@ -124,11 +128,26 @@ https://cc.163.com/583946984
 千度热播：
 https://qiandurebo.com/web/video.php?roomnumber=33333
 
-pandaTV：
+PandaTV：
 https://www.pandalive.co.kr/live/play/bara0109
 
 猫耳FM：
 https://fm.missevan.com/live/868895007
+
+Look直播:
+https://look.163.com/live?id=65108820&position=3
+
+WinkTV:
+https://www.winktv.co.kr/live/play/anjer1004
+
+FlexTV:
+https://www.flextv.co.kr/channels/593127/live
+
+PopkonTV:
+https://www.popkontv.com/live/view?castId=wjfal007&partnerCode=P-00117
+
+TwitCasting:
+https://twitcasting.tv/c:uonq
 ```
 
 直播间分享地址和网页端长地址都能正常进行录制（抖音尽量用长链接，避免因短链接转换失效导致不能正常录制，而且需要有nodejs环境，否则无法转换）。
@@ -152,7 +171,6 @@ https://fm.missevan.com/live/868895007
 
 ```bash
 git clone https://github.com/ihmily/DouyinLiveRecorder.git
-
 ```
 
 2.进入项目文件夹，安装依赖
@@ -178,7 +196,17 @@ apt update
 apt install ffmpeg
 ```
 
-对于Mac系统，访问 https://evermeet.cx/ffmpeg/ 安装FFmpeg。
+macOS 执行
+
+**如果已经安装 Homebrew 请跳过这一步**
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+```bash
+brew install ffmpeg
+```
 
 4.运行程序
 
@@ -246,9 +274,24 @@ docker-compose stop
 [![iridescentGray](https://github.com/iridescentGray.png?size=50)](https://github.com/iridescentGray)
 [![annidy](https://github.com/annidy.png?size=50)](https://github.com/annidy)
 [![wwkk2580](https://github.com/wwkk2580.png?size=50)](https://github.com/wwkk2580)
+[![missuo](https://github.com/missuo.png?size=50)](https://github.com/missuo)
+
 &emsp;
 
 ## ⏳提交日志
+
+- 20240311
+  - 修复海外平台录制bug，增加画质选择，增强录制稳定性
+  
+  - 修复虎牙录制bug (虎牙`一起看`频道 有特殊限制，有时无法录制)
+  
+- 20240309
+  - 修复虎牙直播、小红书直播和B站直播录制
+  - 新增5个直播平台录制，包括winktv、flextv、look、popkontv、twitcasting
+  - 新增部分海外平台账号密码配置，实现自动登录并更新配置文件中的cookie
+  - 新增自定义配置需要使用代理录制的平台
+  - 新增只推送开播消息不进行录制设置
+  - 修复了一些bug
 
 - 20240209
   - 优化AfreecaTV录制，新增账号密码登录获取cookie以及持久保存
