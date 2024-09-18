@@ -1,1 +1,1 @@
-docker build -t feishu_robot .
+docker build -t douyin_recorder .
